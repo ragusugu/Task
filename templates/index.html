@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10;
+            padding: 30px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label, input, button {
+            display: block;
+            margin-bottom: 20px;
+            width: 90%;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="submit"] {
+            background-color: #008CBA;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0075A6;
+        }
+
+        #updateForm, #deleteForm {
+            display: none;
+        }
+        .toggle-btn {
+            background-color: #786c6c;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .toggle-btn:hover {
+            background-color: #73cbdc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <!-- Add Employee -->
+    <button class="toggle-btn" onclick="toggleForm('Addform')">Add Employee</button>
+    <form id="Addform" style="display: block;">
+        <label for="Id">ID:</label>
+        <input type="text" id="id" name="id"><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br>
+        <button type="button" onclick="addEmployee()">Add Employee</button>
+    </form>
+
+    <button class="toggle-btn" onclick="toggleForm('updateForm')">Update Employee</button>
+    <form id="updateForm" style="display: none;">
+        <label for="updateId">Employee ID to Update:</label>
+        <input type="text" id="updateId" name="updateId"><br><br>
+        
+        <label for="updateName">New Name:</label>
+        <input type="text" id="updateName" name="updateName"><br><br>
+        
+        <label for="updateEmail">New Email:</label>
+        <input type="text" id="updateEmail" name="updateEmail"><br><br>
+        
+        <button type="button" onclick="updateEmployee()">Update Employee</button>
+    </form>
+     <!-- Form to delete employee -->
+    <button class="toggle-btn" onclick="toggleForm('deleteForm')">Delete Employee</button>
+    <form id="deleteForm" style="display: none;">
+        <label for="deleteId">Employee ID to Delete:</label>
+        <input type="text" id="deleteId" name="deleteId"><br><br>
+        
+        <button type="button" onclick="deleteEmployee()">Delete Employee</button>
+    </form>
+    <script>
+                // Function to toggle the visibility of forms
+        function toggleForm(formId) {
+            console.log(`Toggling form with ID: ${formId}`);
+            const form = document.getElementById(formId);
+            form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+
+            // Hide other forms when showing a particular form
+            const forms = document.querySelectorAll('form');
+            forms.forEach(f => {
+                if (f.id != formId) {
+                    f.style.display = 'none';
+                }
+            });
+        }
+        function addEmployee() {
+            const id = document.getElementById('id').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            fetch('/employees', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id, name: name, email: email })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Employee added successfully!');
+                    window.location.href = '/employees';
+                } else {
+                    throw new Error('Failed to add employee');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error, show message, etc.
+            });
+        }
+
+        function updateEmployee() {
+            const id = document.getElementById('updateId').value;
+            const name = document.getElementById('updateName').value;
+            const email = document.getElementById('updateEmail').value;
+            
+            fetch(`/employees/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: name, email: email })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Employee updated successfully!');
+                    window.location.href = '/employees'; 
+                }
+            });
+        }
+        
+        function deleteEmployee() {
+            const id = document.getElementById('deleteId').value;
+            
+            fetch(`/employees/${id}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    alert('Employee deleted successfully!');
+                    window.location.href = '/employees'; 
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
