@@ -29,7 +29,7 @@ with app.app_context():
 # Render the HTML form
 @app.route('/')
 def add_employee_form():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 # # API to add employee details
 @app.route('/employees', methods=['POST'])
