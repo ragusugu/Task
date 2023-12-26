@@ -1,23 +1,7 @@
-# file = r'python/task6.txt'
-# find = "love"
-
-# def read_check(file, find):
-#     with open(file, 'r') as file:
-#         content = file.read()
-#         print(content)
-#         position = content.find(find)
-#         if position != -1:
-#             return True
-#         else:
-#             return False
-# def wrd_c(file):
-#     wrd_count={}
-
-# read_check(file, find)
 
 def is_string_present(file_path, target_string):
     with open(file_path, 'r') as file:
-        content = file.read().lower()  # Read file content and convert to lowercase for case-insensitive check
+        content = file.read().lower()
         return target_string.lower() in content
 
 def word_count(file_path):
