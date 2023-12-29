@@ -1,21 +1,20 @@
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date, Float
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
-
 from urllib.parse import quote
-# from sqlalchemy import text
-
+from conn import conn
 
 # Database connection parameters
-dbname = "sugan"
-user = "postgres"
-password = "Sugan@123"
-host = "localhost"
-port = "5432"
-e_password = quote(password)
+# dbname = "sugan"
+# user = "postgres"
+# password = "Sugan@123"
+# host = "localhost"
+# port = "5432"
+# e_password = quote(password)
 
-# Create an SQLAlchemy engine
-engine = create_engine(f"postgresql+psycopg2://{user}:{e_password}@{host}:{port}/{dbname}", echo=True)
+# # Create an SQLAlchemy engine
+# engine = create_engine(f"postgresql+psycopg2://{user}:{e_password}@{host}:{port}/{dbname}", echo=True)
+engine=conn()
 # Define the SQLAlchemy Base
 Base = declarative_base()
 
@@ -55,24 +54,24 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# Insert data into the tables
-insert_data = [
-    (3002, 'Nick Rimando', 'New York', 100, 5001),
-    (3007, 'Brad Davis', 'New York', 200, 5001),
-    (3005, 'Graham Zusi', 'California', 200, 5002),
-    (3008, 'Julian Green', 'London', 300, 5002),
-    (3004, 'Fabian Johnson', 'Paris', 300, 5006),
-    (3009, 'Geoff Cameron', 'Berlin', 100, 5003),
-    (3003, 'Jozy Altidor', 'Moscow', 200, 5007),
-    (3001, 'Brad Guzan', 'London', None, 5005)
-]
+# # Insert data into the tables
+# insert_data = [
+#     (3002, 'Nick Rimando', 'New York', 100, 5001),
+#     (3007, 'Brad Davis', 'New York', 200, 5001),
+#     (3005, 'Graham Zusi', 'California', 200, 5002),
+#     (3008, 'Julian Green', 'London', 300, 5002),
+#     (3004, 'Fabian Johnson', 'Paris', 300, 5006),
+#     (3009, 'Geoff Cameron', 'Berlin', 100, 5003),
+#     (3003, 'Jozy Altidor', 'Moscow', 200, 5007),
+#     (3001, 'Brad Guzan', 'London', None, 5005)
+# ]
 
-for item in insert_data:
-    customer = Customer(customer_id=item[0], cust_name=item[1], cust_city=item[2], grade=item[3], salesman_id=item[4])
-    session.merge(customer)
+# for item in insert_data:
+#     customer = Customer(customer_id=item[0], cust_name=item[1], cust_city=item[2], grade=item[3], salesman_id=item[4])
+#     session.merge(customer)
 
-# Commit the changes
-session.commit()
+# # Commit the changes
+# session.commit()
 
 # Execute the query using SQLAlchemy
 query_result = (
