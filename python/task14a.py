@@ -19,7 +19,7 @@ Base = declarative_base()
 class AttributeIssueCount(Base):
     __tablename__ = 'attribute_issue_count'
     issue_count_id = Column(Integer, primary_key=True, autoincrement=True)
-    tenant_id = Column(Integer, nullable=False)
+    tenant_id = Column(Integer,primary_key=True)
     integration_id = Column(Integer, nullable=False)
     meta_data_id = Column(Integer, nullable=False)
     created_month = Column(TIMESTAMP, nullable=False)
