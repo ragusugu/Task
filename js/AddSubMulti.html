@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    button {
+      font-size: 16px;
+      margin: 5px;
+    }
+  </style>
+  <title>Calculator</title>
+</head>
+<body>
+
+  <div>
+    <button onclick="performOperation('add')">Addition</button>
+    <button onclick="performOperation('subtract')">Subtraction</button>
+    <button onclick="performOperation('multiply')">Multiplication</button>
+  </div>
+
+  <div>
+    <p>Result: <span id="result">0</span></p>
+  </div>
+
+  <script>
+    class Calculator {
+      constructor() {
+        this.value1 = 0;
+        this.value2 = 0;
+        this.result = 0;
+      }
+
+      add() {
+        this.result = this.value1 + this.value2;
+      }
+
+      subtract() {
+        this.result = this.value1 - this.value2;
+      }
+
+      multiply() {
+        this.result = this.value1 * this.value2;
+      }
+    }
+
+    const calculator = new Calculator();
+
+    function performOperation(operation) {
+      calculator.value1 = parseFloat(prompt("Enter the first value:")) || 0;
+      calculator.value2 = parseFloat(prompt("Enter the second value:")) || 0;
+
+      switch (operation) {
+        case 'add':
+          calculator.add();
+          break;
+        case 'subtract':
+          calculator.subtract();
+          break;
+        case 'multiply':
+          calculator.multiply();
+          break;
+        default:
+          console.log("Invalid operation");
+      }
+
+      document.getElementById('result').textContent = calculator.result;
+    }
+  </script>
+
+</body>
+</html>

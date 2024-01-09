@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Example Program</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<div>
+    <h2>Input Values</h2>
+
+    <label for="numberInput">Number:</label>
+    <input type="number" id="numberInput" value="">
+<br><br>
+    <label for="stringInput">String:</label>
+    <input type="text" id="stringInput" value="">
+    <br><br>
+    <label for="arrayInput">Array (comma-separated values):</label>
+    <input type="text" id="arrayInput" value="">
+    <br><br>
+    <button onclick="performOperations()">Perform Operations</button>
+</div>
+
+<script>
+    function performOperations() {
+        // Number methods example
+        const numberExample = parseFloat(document.getElementById('numberInput').value);
+
+        console.log("Number methods example:");
+        console.log(`Original number: ${numberExample}`);
+        console.log(`Rounded number: ${Math.round(numberExample)}`);
+        console.log(`Fixed to two decimals: ${numberExample.toFixed(2)}`);
+        console.log('\n');
+
+        // String methods example
+        const stringExample = document.getElementById('stringInput').value;
+
+        console.log("String methods example:");
+        console.log(`Original string: "${stringExample}"`);
+        console.log(`Trimmed string: "${stringExample.trim()}"`);
+        console.log(`Uppercase: "${stringExample.toUpperCase()}"`);
+        console.log('\n');
+
+        // Arrays and Arrays methods example
+        const arrayExample = document.getElementById('arrayInput').value.split(',').map(Number);
+
+        console.log("Arrays and Arrays methods example:");
+        console.log(`Original array: ${arrayExample}`);
+        console.log(`Reversed array: ${arrayExample.slice().reverse()}`);
+        console.log(`Sliced array: ${arrayExample.slice(1, 4)}`);
+        console.log('\n');
+
+        // Statements example
+        const condition = true;
+
+        console.log("Statements example:");
+        if (condition) {
+            console.log("Condition is true");
+        } else {
+            console.log("Condition is false");
+        }
+        console.log('\n');
+
+        // Looping conditions example
+        console.log("Looping conditions example:");
+        for (let i = 0; i < 5; i++) {
+            console.log(`Iteration ${i}`);
+        }
+        console.log('\n');
+
+        // Maps example
+        const mapExample = new Map();
+        mapExample.set("key1", "value1");
+        mapExample.set("key2", "value2");
+
+        console.log("Maps example:");
+        console.log(`Value for key1: ${mapExample.get("key1")}`);
+        console.log('\n');
+
+        // JS functions example
+        function add(a, b) {
+            return a + b;
+        }
+
+        console.log("JS functions example:");
+        console.log(`Sum of 5 and 3: ${add(5, 3)}`);
+        console.log('\n');
+
+        // JS Classes example
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+
+            getArea() {
+                return this.width * this.height;
+            }
+        }
+
+        console.log("JS Classes example:");
+        const rectangle = new Rectangle(4, 6);
+        console.log(`Area of the rectangle: ${rectangle.getArea()}`);
+        console.log('\n');
+
+        // JS async and Await example
+        async function asyncExample() {
+            console.log("JS async and Await example:");
+            console.log("Async operation started...");
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            console.log("Async operation completed.");
+            console.log('\n');
+        }
+
+        asyncExample();
+
+        // jQuery example
+        console.log("jQuery example:");
+        $(document).ready(function() {
+            console.log("Document ready!");
+        });
+        console.log('\n');
+    }
+</script>
+
+</body>
+</html>
